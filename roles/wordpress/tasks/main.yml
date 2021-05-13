@@ -1,0 +1,46 @@
+---
+- name: 'Instala pacotes de dependencia do sistema operacional'
+  apt:
+    name: "{{ item }}"
+    state: latest
+  become: yes
+  with_items:
+    - php5
+    - apache2
+    - libapache2-mod-php5
+    - php5-gd
+    - libssh2-php
+    - php5-mcrypt
+    - python-mysqldb
+    - php5-mysql
+    - mysql-client-core-5.5
+
+- name: 'Baixa o arquivo de instalacao do Wordpress'
+  get_url:
+    url: "{{ download_wordpress }}"
+    dest: '/tmp/wordpress.tar.gz'
+
+- name: 'Descompacta o wordpress'
+  unarchive:
+    src: '/tmp/wordpress.tar.gz'
+    dest: '/var/www/'
+    remote_src: yes
+  become: yes
+
+- copy:
+    src: '/var/www/wordpress/wp-config-sample.php'
+    dest: '/var/www/wordpress/wp-config.php'
+    remote_src: yes
+  become: yes
+
+- name: 'Configura o wp-config com as entradas do banco de dados'     
+  replace:
+    path: '/var/www/wordpress/wp-config.php'
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.value }}"
+  with_items:
+    - { regex: 'database_name_here', value: "{{ wp_db_name }}"}
+    - { regex: 'username_here', value: "{{ wp_user }}"}
+    - { regex: 'password_here', value: "{{ db_pass }}"}
+    - { regex: 'localhost', value: "{{ db_ip }}"}
+  become: yes

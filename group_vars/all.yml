@@ -1,0 +1,10 @@
+---
+download_wordpress: 'https://wordpress.org/wordpress-4.8.16.tar.gz'
+wp_user: 'wordpress_user'
+wp_db_name: 'wordpress_db'
+db_pass: '12345'
+wp_installation_dir: '/var/www/wordpress'
+wordpress_ip: '192.168.43.14'
+db_ip: '192.168.43.15'
+document_root: '/var/www/wordpress'
+
