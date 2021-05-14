@@ -14,12 +14,8 @@
 echo "Iniciando a instalação do vagrant..."
 echo " "
 echo " "
-echo " "
-echo " "
 #apt-get install vagrant -y
 vagrant -v
-echo " "
-echo " "
 echo " "
 echo " "
 
@@ -27,8 +23,6 @@ echo " "
 
 echo "Iniciando a instalação do ansible"
 #apt-get install ansible -y
-echo " "
-echo " "
 echo " "
 echo " "
 
@@ -39,10 +33,8 @@ sleep 5
 echo "Inciando o vagrant"
 echo " "
 echo " "
-echo " "
-echo " "
 
-#vagrant init
+vagrant init
 
 sleep 5
 
@@ -58,14 +50,10 @@ echo -e "Digite o nome da interface escolhida:"
 read -p "Interface: " -t 20 INTERFACE 
 echo " "
 echo " "
-echo " "
-echo " "
 
 sleep 02
 
 echo "Você escolheu a interface $INTERFACE"
-echo " "
-echo " "
 echo " "
 echo " "
 
@@ -78,12 +66,59 @@ sleep 3
 
 echo " "
 echo " "
-echo " "
 
 read -p "IP da máquina WORDPRESS: " -t 20 IP_WORDPRESS
 echo " "
 read -p "IP da máquina MYSQL: " -t 20 IP_MYSQL
 echo " "
+echo " "
+
+echo "IP da máquina wordpress $IP_WORDPRESS"
+echo "IP da máquina MYSQL $IP_MYSQL"
+
+echo " "
+echo " "
+echo "Iniciando o box Wordpress"
+sleep 2
+echo " "
+echo " "
+cp vagrantfileTemplate Vagrantfile
+
+sed -ie 's/vars_ip_addr1/'$IP_WORDPRESS'/' Vagrantfile
+sed -ie 's/vars_ip_addr2/'$IP_MYSQL'/' Vagrantfile
+
+sed -ie 's/vars_ip_addr1/'$IP_WORDPRESS'/' hosts
+sed -ie 's/vars_ip_addr2/'$IP_MYSQL'/' hosts
+
+sed -ie 's/vars_ip_addr1/'$IP_WORDPRESS'/' group_vars/all.yml
+sed -ie 's/vars_ip_addr2/'$IP_MYSQL'/' group_vars/all.yml
+
+echo "Deploy BOX WORDPRESS"
+vagrant up wordpress
+sleep 2
+echo " "
+echo " "
+
+echo "Deploy BOX MYSQL"
+vagrant up mysql
+echo " "
+echo " "
+
+vagrant status
+
+echo " "
+echo " "
+
+echo "Iniciando as configurações com ansible..."
+sleep 15
+ansible-playbook provisioning.yml -i hosts
+
+echo " "
+echo " "
 
 
-
+echo "Acesse o portal em http://$IP_WORDPRESS"
+echo " "
+echo " "
+echo "Aproveite o laboratório e go root!"
+echo "Wesley Paes"
