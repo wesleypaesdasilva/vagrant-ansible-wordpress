@@ -116,9 +116,9 @@ ansible-playbook provisioning.yml -i hosts
 echo " "
 echo " "
 
-
-echo "Acesse o portal em http://$IP_WORDPRESS"
+echo "SE AS CONFIGURAÇÕES DO ANSIBLE DERAM ERRO É PORQUE CERTAMENTE A SUA MÁQUINA NÃO CONSEGUIU FAZER A TROCA DE CHAVES COM OS BOXES NA PRIMEIRA TENTATIVA."
+echo "PARA CONTORNAR ISSO, BASTA RODAR O PLAYBOOK DO ANSIBLE MANUALMENTE COM O SEGUINTE COMANDO:"
+echo "ansible-playbook provisioning.yml -i hosts"
 echo " "
 echo " "
-echo "Aproveite o laboratório e go root!"
-echo "Wesley Paes"
+echo "Acesse sua página em: http://$IP_WORDPRESS"
