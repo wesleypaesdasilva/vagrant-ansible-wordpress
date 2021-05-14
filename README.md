@@ -4,7 +4,7 @@
 <h3>Siga as instruções</h3>
 <h4>Step 1 = "chmod +x install.sh"</h4>
 <h4>Step 2 = "sudo ./install.sh"</h4>
-<h4>Step 3 = "vagrant init</h4>
+<h4>Step 3 = "Siga as instruções!</h4>
 
 
   
