@@ -10,11 +10,20 @@
 # Data of last change: 13/05/2021
 # Changer by: Wesley Paes
 
-## Install Vagrant and Ansible
+## Instalando virtualbox, Vagrant e Ansible
+echo "Iniciando a instalação do virtualbox..."
+apt-get install virtualbox-y
+echo " "
+echo " "
+
 echo "Iniciando a instalação do vagrant..."
 echo " "
 echo " "
-#apt-get install vagrant -y
+
+apt-get install vagrant -y
+echo " "
+echo " "
+
 vagrant -v
 echo " "
 echo " "
@@ -22,7 +31,7 @@ echo " "
 #sleep 5
 
 echo "Iniciando a instalação do ansible"
-#apt-get install ansible -y
+apt-get install ansible -y
 echo " "
 echo " "
 
